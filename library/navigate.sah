@@ -1,0 +1,72 @@
+
+Skip to content
+Pull requests
+Issues
+Marketplace
+Explore
+@dawidvinicius
+Learn Git and GitHub without any code!
+
+Using the Hello World guide, you’ll start a branch, write comments, and open a pull request.
+dawidvinicius /
+toma_presente_davi
+
+1
+0
+
+    0
+
+Code
+Issues 0
+Pull requests 0
+Actions
+Projects 0
+Wiki
+Security
+Insights
+Settings
+toma_presente_davi/library/navigate.js
+@dawidvinicius dawidvinicius Add files via upload 76c76aa 7 days ago
+27 lines (20 sloc) 651 Bytes
+function navigateAuxiliaryCad($nameCadAuxiliar, $subCadAuxiliar) {
+
+    if ($subCadAuxiliar == null) {
+
+        _click(_div("Cad. Auxiliares")); 
+        _click(_div($nameCadAuxiliar));
+    } else {
+
+        _click(_div("Cad. Auxiliares")); 
+        _click(_div($nameCadAuxiliar));
+        _click(_div($subCadAuxiliar));
+    }
+}
+
+function navigateAdministration($usuario, $subusuario) {
+    
+    _click(_div("Administração[1]"));
+    _click(_div($usuario));
+    _click(_div($subusuario));
+}
+
+function navigateFinance($type, $subtype) {
+
+    _click(_div("Financeiro"));
+    _click(_div($type));
+    _click(_div($subtype));
+}
+
+    © 2020 GitHub, Inc.
+    Terms
+    Privacy
+    Security
+    Status
+    Help
+
+    Contact GitHub
+    Pricing
+    API
+    Training
+    Blog
+    About
+

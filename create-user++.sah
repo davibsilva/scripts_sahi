@@ -1,0 +1,151 @@
+_include("../library/navigate.js");
+_include("../library/record.js");
+_include("../library/util.js");
+
+var $person = {
+    name: "Naruto",
+    lastName: "Uzumaki",
+    nickName: "VoidHead",
+    cpf: "47511379800",
+    email: "davi.barbosa2806@gmail.com",
+    ddd: "11",
+    phoneNumber: "991062682",
+    responsablePerson: {
+        name: "Fulano",
+        lastName: "Ciclano",
+        nickName: "Fuclano",
+        cpf: "03264792877",
+        email: "fulano.ciclano@gmail.com"
+
+    },
+    user: {
+        userName: "Narumaki",
+        password: "123456",
+        userJob: "Coordenador",
+        newUserName: "Narukage",
+        newJob: "Diretor"
+    }
+}
+
+navigateAdministration("Usuários[1]", "Usuários");
+inputTextWrite("username", $person.user.userName);
+_click(_span("Pesquisar"));
+assertTotalRecordNumber(0);
+_click(_div("Novo"));
+inputTextWrite("newUsername", $person.user.userName);
+inputPasswordWrite("newPassword", $person.user.password);
+inputPasswordWrite("confirmPassword", $person.user.password);
+_setSelected(_select("budgetPersonJobId"), $person.user.userJob);
+_click(_div("Salvar"));
+assertFailedRecord("Pessoa - Este campo é obrigatório e não foi preenchido");
+_click(_image("Find"));
+inputTextWrite("personName", $person.name);
+_click(_span("Pesquisar"));
+assertTotalRecordNumber(0);
+_click(_span("Cancelar[3]"));
+_click(_image("Add16"));
+inputTextWrite("firstName", $person.name);
+inputTextWrite("lastName", $person.lastName);
+inputTextWrite("nickName[1]", $person.nickName);
+inputTextWrite("cpf[1]", $person.cpf);
+inputTextWrite("emailAddress", $person.email);
+inputTextWrite("phoneDdd", $person.ddd);
+inputTextWrite("phoneNumber", $person.phoneNumber);
+_click(_span("Salvar[1]"));
+_expectConfirm("Erros encontrados durante o processamento:/nVerifique os campos em destaque e preencha-os corretamente", true);
+inputTextWrite("phoneDdd", " ");
+inputTextWrite("phoneNumber", " ");
+_click(_span("Salvar[1]"));
+_click(_div("Salvar"));
+assertSuccessRecord("As informações foram salvas com sucesso!");
+_click(_div("Listagem"));
+assertRecordExists($person.user.userName);
+_click(_cell($person.user.userName));
+_click(_div("Editar"));
+inputTextWrite("newUsername", $person.user.newUserName);
+_setSelected(_select("budgetPersonJobId"), $person.user.newJob);
+_click(_div("Salvar"));
+assertSuccessRecord("As informações foram salvas com sucesso!");
+_click(_div("Listagem"))
+inputTextWrite("username", $person.user.newUserName);
+_click(_span("Pesquisar"));
+assertTotalRecordNumber(1);
+_click(_cell($person.user.newUserName));
+_click(_div("Excluir"));
+_expectConfirm("Deseja realmente excluir este registro?", true);
+navigateAuxiliaryCad("Cadastro de pessoas")
+_click(_cell($person.name + " " + $person.lastName));
+_click(_div("Excluir"));
+_expectConfirm("Deseja realmente excluir este registro?", true);
+_navigateTo("http://sahi.esferas.com.br/index.php/home/index");
+
+
+navigateAuxiliaryCad("Cadastro de pessoas");
+inputTextWrite("personName", $person.name);
+_click(_span("Pesquisar"));
+assertTotalRecordNumber(0);
+_click(_div("Novo"));
+inputTextWrite("firstName", $person.name);
+inputTextWrite("lastName", $person.lastName);
+inputTextWrite("nickName", $person.nickName);
+inputTextWrite("cpf", $person.cpf);
+_click(_image("Add16"));
+inputTextWrite("firstName[1]", $person.responsablePerson.name);
+inputTextWrite("lastName[1]", $person.responsablePerson.lastName);
+inputTextWrite("nickName[2]", $person.responsablePerson.nickName);
+inputTextWrite("cpf[2]", $person.responsablePerson.cpf);
+inputTextWrite("emailAddress[1]", $person.responsablePerson.email);
+_click(_span("Salvar[1]"));
+_click(_span("Cancelar[3]"));
+inputTextWrite("emailAddress", $person.email);
+inputTextWrite("phoneDdd", $person.ddd);
+inputTextWrite("phoneNumber", $person.phoneNumber);
+_click(_div("Salvar"));
+assertFailedRecord("Telefone - Informe um telefone no formato (00) 0000-0000 ou (00) 00000-0000");
+inputTextWrite("phoneDdd", " ");
+inputTextWrite("phoneNumber", " ");
+_click(_div("Salvar"));
+assertSuccessRecord("As informações foram salvas com sucesso!");
+navigateAdministration("Usuários[1]", "Usuários");
+inputTextWrite("username", $person.user.userName);
+_click(_span("Pesquisar"));
+assertTotalRecordNumber(0);
+_click(_div("Novo"));
+_click(_image("Find"));
+inputTextWrite("personName", $person.name);
+_click(_span("Pesquisar"));
+assertTotalRecordNumber(1);
+_click(_cell($person.name + " " + $person.lastName));
+_click(_span("Concluir"));
+inputTextWrite("newUsername", $person.user.userName);
+inputPasswordWrite("newPassword", $person.user.password);
+inputPasswordWrite("confirmPassword", $person.user.password);
+_setSelected(_select("budgetPersonJobId"), $person.user.userJob);
+_click(_div("Salvar"));
+assertSuccessRecord("As informações foram salvas com sucesso!");
+_click(_div("Listagem"));
+inputTextWrite("username", $person.user.userName);
+assertRecordExists($person.user.userName);
+_click(_cell($person.user.userName));
+_click(_div("Editar"));
+inputTextWrite("newUsername", $person.user.newUserName);
+_setSelected(_select("budgetPersonJobId"), $person.user.newJob);
+_click(_div("Salvar"));
+assertSuccessRecord("As informações foram salvas com sucesso!");
+_click(_div("Listagem"));
+assertRecordExists($person.user.newUserName);
+_click(_cell($person.user.newUserName));
+_click(_div("Excluir"));
+_expectConfirm("Deseja realmente excluir este registro?", true);
+inputTextWrite("username", $person.user.newUserName);
+_click(_span("Pesquisar"));
+assertTotalRecordNumber(0);
+_navigateTo("http://sahi.esferas.com.br/index.php/home/index");
+navigateAuxiliaryCad("Cadastro de pessoas");
+_click(_cell($person.name + " " + $person.lastName));
+_click(_div("Excluir"));
+_expectConfirm("Deseja realmente excluir este registro?", true);
+_click(_cell($person.responsablePerson.name + " " + $person.responsablePerson.lastName));
+_click(_div("Excluir"));
+_expectConfirm("Deseja realmente excluir este registro?", true);
+_navigateTo("http://sahi.esferas.com.br/index.php/home/index");

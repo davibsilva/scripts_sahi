@@ -1,0 +1,61 @@
+function saveBorderoItem($borderoTypeName, $itemName) {
+    _click(_div("Novo"));
+    inputTextWrite("description", $itemName);
+    _setSelected(_select("bordereauTypeId"), $borderoTypeName);
+    _click(_div("Salvar"));
+    assertSuccessRecord("As informações foram salvas com sucesso!");
+    $code = _getText(_div("bordereauItemCodeDiv"));
+    return  "!"+$code+"!";
+}
+
+function saveBorderoType($borderoTypeName, saveBorderoItem, $borderoItens, $borderoItensCode) {
+
+    navigateAuxiliaryCad("Borderôs", "Tipos de borderô");
+    inputTextWrite("description", $borderoTypeName);
+    _click(_div("Pesquisar"));
+    assertTotalRecordNumber(0);
+    _click(_div("Novo"));
+    _click(_div("Salvar"));
+    assertFailedRecord("Descrição - Este campo é obrigatório e não foi preenchido");
+    inputTextWrite("description", $borderoTypeName);
+    _click(_div("Salvar"));
+    _doubleClick(_div("Salvar"));
+    assertSuccessRecord("As informações foram salvas com sucesso!");
+    navigateAuxiliaryCad("Borderôs", "Tipos de borderô");
+    inputTextWrite("description", $borderoTypeName);
+    _click(_span("Pesquisar"));
+    assertTotalRecordNumber(1);
+    navigateAuxiliaryCad("Borderôs", "Itens de borderô");
+
+    //Looping que permite quantidade de itens cadastrados dinâmica
+    $codeArray = [];
+    for($i = 0; $i <= $borderoItens.length - 1; $i++) {
+
+        $codeArray.push(saveBorderoItem($borderoTypeName, $borderoItens[$i].item));
+    }
+    return $codeArray;
+}
+
+function saveFormula($borderoItem, $recipe, $column) {
+
+    _click(_div("Listagem"));
+    inputTextWrite("description", $borderoItem);
+    _click(_span("Pesquisar"));
+    assertTotalRecordNumber(1);
+    _click(_cell($borderoItem));
+    _doubleClick(_cell($borderoItem));
+    inputTextAreaWrite("formula", $recipe);
+
+    if(!$column) {
+
+        _click(_image("radio_chk0.png"));
+        _click(_div("Salvar"));
+        assertSuccessRecord("As informações foram salvas com sucesso!");
+    }else {
+
+        _click(_image("radio_chk0.png["+$column+"]"));
+        _click(_div("Salvar"));
+        assertSuccessRecord("As informações foram salvas com sucesso!");
+    }
+    
+}

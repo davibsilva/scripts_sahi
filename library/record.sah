@@ -1,0 +1,32 @@
+function assertTotalRecordNumber($number) {
+	_assertExists(_link("Total de registros: " + $number));
+	_assertVisible(_link("Total de registros: " + $number));
+	_assertEqual("Total de registros: " + $number, _getText(_link("Total de registros: " + $number)));
+}
+
+function assertSuccessRecord($assertedText) {
+	_assertExists(_span($assertedText));
+	_assertVisible(_span($assertedText));
+	_assertEqual($assertedText, _getText(_span($assertedText)));
+}
+
+function assertFailedRecord($assertedText) {
+	_assertExists(_div($assertedText));
+	_assertVisible(_div($assertedText));
+	_assertEqual($assertedText, _getText(_div($assertedText)));	
+}
+
+function assertExistsMsg($assertedText) {
+	_assertNotExists(_div($assertedText));
+}
+
+function assertRecordExists($recordToSearch) {
+	_assertExists(_cell($recordToSearch));
+	_assertVisible(_cell($recordToSearch));
+	_assertEqual($recordToSearch, _getText(_cell($recordToSearch)));	
+}
+
+function assertRecordNotExists($recordToSearch) {
+	_assertNotExists(_cell($recordToSearch));
+	_assertNotVisible(_cell($recordToSearch));
+}

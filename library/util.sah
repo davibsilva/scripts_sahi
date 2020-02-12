@@ -1,0 +1,123 @@
+function login($login, $password) {
+
+    _setValue(_textbox("username"), $login);
+	_setValue(_password("password"), $password);
+	_click(_span("Entrar"));
+}
+
+function getDateTime(format){
+	
+	format = format?format:'Y-m-d H:i:s';
+	
+	now     = new Date();
+	$day    = ""+now.getDate();
+	$month  = ""+(now.getMonth()+1);
+	$year   = ""+now.getFullYear();
+	$hour   = ""+now.getHours();
+	$minute = ""+now.getMinutes();
+	$second = ""+now.getSeconds();
+	
+	$monthName = getMonthName($month);
+	
+	if( $day.length < 2 )
+		$day = "0" + $day;
+
+	if( $month.length < 2 )
+		$month = "0" + $month;
+
+	if( $hour.length < 2 )
+		$hour = "0" + $hour;
+
+	if( $minute.length < 2 )
+		$minute = "0" + $minute;
+	
+	if( $second.length < 2 )
+		$second = "0" + $second;
+
+	format = format.replace('monthName', $monthName);   /** NOME DO MÊS */
+	format = format.replace('Y', $year);  				/** ANO 		*/
+	format = format.replace('m', $month);  				/** MÊS 		*/
+	format = format.replace('d', $day);    				/** DIA 		*/
+	format = format.replace('H', $hour);   				/** HORA 		*/
+	format = format.replace('i', $minute); 				/** MINUTO 		*/
+	format = format.replace('s', $second); 				/** SEGUNDO		*/
+	
+	return format;
+}
+
+function inputTextWrite($inputName, $inputValue) {
+	// _click(_textbox($inputName));
+	_setValue(_textbox($inputName), $inputValue);
+}
+
+function inputTextAreaWrite($inputName, $inputValue) {
+	
+	_setValue(_textarea($inputName), $inputValue);
+}
+
+function inputPasswordWrite($inputName, $inputValue) {
+
+	_setValue(_password($inputName), $inputValue);
+}
+
+function tableFeed() {
+
+    _click(_span("0,00"));
+_doubleClick(_span("0,00"));
+inputTextWrite("gridboxCell0x2", "5");
+_click(_span("0,00"));
+_doubleClick(_span("0,00"));
+_setValue(_textbox("gridboxCell0x3"), "5");
+
+
+
+_click(_span(255));
+_doubleClick(_span(255));
+inputTextWrite("gridboxCell1x2", "5");
+_click(_span(257));
+_doubleClick(_span(257));
+_setValue(_textbox("gridboxCell1x3"), "5");
+
+
+_click(_span("0,00[2]"));
+_doubleClick(_span("0,00[2]"));
+inputTextWrite("gridboxCell2x2", "5");
+_click(_span("0,00[2]"));
+_doubleClick(_span("0,00[2]"));
+_setValue(_textbox("gridboxCell2x3"), "5");
+
+
+_click(_span("0,00[3]"));
+_doubleClick(_span("0,00[3]"));
+inputTextWrite("gridboxCell3x2", "5");
+_click(_span("0,00[4]"));
+_doubleClick(_span("0,00[3]"));
+_setValue(_textbox("gridboxCell3x3"), "5");
+
+
+_click(_span("0,00[4]"));
+_doubleClick(_span("0,00[4]"));
+inputTextWrite("gridboxCell4x2", "1");
+
+
+_click(_span("0,00[6]"));
+_doubleClick(_span("0,00[6]"));
+inputTextWrite("gridboxCell5x2", "1");
+
+
+
+_click(_span("0,00[8]"));
+_doubleClick(_span("0,00[8]"));
+inputTextWrite("gridboxCell6x2", "1");
+
+_click(_span("0,00[9]"));
+_doubleClick(_span("0,00[9]"));
+inputTextWrite("gridboxCell0x2", "10");
+
+_click(_span("0,00[9]"));
+_doubleClick(_span("0,00[9]"));
+inputTextWrite("gridboxCell0x3", "500");
+
+_click(_cell("002.002 - lucro"));
+
+}

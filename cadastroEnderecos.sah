@@ -1,0 +1,101 @@
+_include("../library/navigate.sah");
+_include("../library/record.sah");
+_include("../library/util.sah");
+
+for ($i=0; $i < 1; $i++) {
+    $endereco = {
+        "nome_pais": "b" + $i,
+        "nome_pais_ingles": "b" + $i,
+        "sigla_pais": "Z" + $i,
+        "nome_estado": "b" + $i,
+        "sigla_estado": "Z" + $i,
+        "nome_cidade": "b" + $i,
+        "codigo_ibge": "123456" + $i 
+    };
+
+
+//cad paises
+navigateAuxiliaryCad("Endereços", "Países");
+writeTextBox("description", $endereco.nome_pais);
+_click(_span("Pesquisar"));
+assertRecordNumber(0);
+_click(_div("Novo"));
+writeTextBox("description", $endereco.nome_pais);
+writeTextBox("descriptionEnUs", $endereco.nome_pais_ingles);
+writeTextBox("code", $endereco.sigla_pais);
+_click(_div("Salvar"));
+assertSuccessRecord();
+navigateAuxiliaryCad("Endereços", "Países");
+writeTextBox("description", $endereco.nome_pais);
+_click(_span("Pesquisar"));
+assertRecordNumber(1);
+//cad estados
+navigateAuxiliaryCad("Endereços", "Estados");
+_click(_textbox("description"));
+writeTextBox("description", $endereco.nome_estado);
+_click(_div("Pesquisar"));
+assertRecordNumber(0);
+_click(_div("Novo"));
+_setSelected(_select("countryId"), $endereco.nome_pais);
+writeTextBox("initial", $endereco.sigla_estado);
+writeTextBox("description", $endereco.nome_estado);
+_click(_div("Salvar"));
+assertSuccessRecord();
+navigateAuxiliaryCad("Endereços", "Estados");
+writeTextBox("description", $endereco.nome_estado);
+_click(_span("Pesquisar"));
+assertRecordNumber(1);
+
+//cad cidades
+navigateAuxiliaryCad("Endereços", "Cidades");
+writeTextBox("description", $endereco.nome_cidade);
+_click(_span("Pesquisar"));
+assertRecordNumber(0);
+_click(_div("Novo"));
+_setSelected(_select("countryId"), $endereco.nome_pais);
+_setSelected(_select("stateId"), $endereco.nome_estado);
+writeTextBox("description", $endereco.nome_cidade);
+writeTextBox("ibgeCode", $endereco.codigo_ibge);
+_click(_div("Salvar"));
+assertSuccessRecord();
+navigateAuxiliaryCad("Endereços", "Cidades");
+writeTextBox("description", $endereco.nome_cidade);
+_click(_span("Pesquisar"));
+assertRecordNumber(1);
+
+//testando função excluir cidades
+navigateAuxiliaryCad("Endereços", "Cidades");
+writeTextBox("description", $endereco.nome_cidade);
+_click(_span("Pesquisar"));
+_click(_cell($endereco.nome_cidade));
+_click(_div("Excluir"));
+_expectConfirm("Deseja realmente excluir este registro?", true);
+navigateAuxiliaryCad("Endereços", "Cidades");
+writeTextBox("description", $endereco.nome_cidade);
+_click(_span("Pesquisar"));
+assertRecordNumber(0);
+
+//testando função excluir estados
+navigateAuxiliaryCad("Endereços", "Estados");
+writeTextBox("description", $endereco.nome_estado);
+_click(_span("Pesquisar"));
+_click(_cell($endereco.nome_estado));
+_click(_div("Excluir"));
+_expectConfirm("Deseja realmente excluir este registro?", true);
+navigateAuxiliaryCad("Endereços", "Estados");
+writeTextBox("description", $endereco.nome_estado);
+_click(_span("Pesquisar"));
+assertRecordNumber(0);
+
+// testando função excluir paises
+navigateAuxiliaryCad("Endereços", "Países");
+writeTextBox("description", $endereco.nome_pais);
+_click(_span("Pesquisar"));
+_click(_cell($endereco.nome_pais));
+_click(_div("Excluir"));
+_expectConfirm("Deseja realmente excluir este registro?", true);
+navigateAuxiliaryCad("Endereços", "Países");
+writeTextBox("description", $endereco.nome_pais);
+_click(_span("Pesquisar"));
+assertRecordNumber(0);
+}
