@@ -1,0 +1,14 @@
+function generateCountryData(){
+	var $addressData = {
+	"nome_pais": "NomePais",
+    "nome_pais_ingles": "CountryName",
+    "sigla_pais": "NP",
+    "nome_estado": "NomeEstado",
+    "sigla_estado": "NE",
+    "nome_cidade":  "NomeCidade",
+    "codigo_ibge":  "123456"
+	}
+
+	return $addressData;
+}
+

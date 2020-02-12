@@ -1,0 +1,22 @@
+_include("address_data.sah");
+_include("../navigate.sah");
+_include("../record.sah");
+_include("../util.sah");
+
+var $country = generateCountryData();
+
+navigateAuxiliaryCad("Endereços", "Países");
+inputTextWrite("description", $country.nome_pais);
+_click(_span("Pesquisar"));
+assertTotalRecordNumber(0);
+_click(_div("Novo"));
+inputTextWrite("description", $country.nome_pais);
+inputTextWrite("descriptionEnUs", $country.nome_pais_ingles);
+inputTextWrite("code", $country.sigla_pais);
+_click(_div("Salvar"));
+assertSuccessRecord("As informações foram salvas com sucesso!");
+navigateAuxiliaryCad("Endereços", "Países");
+inputTextWrite("description", $country.nome_pais);
+_click(_span("Pesquisar"));
+assertTotalRecordNumber(1);
+

@@ -1,12 +1,11 @@
 function assertTotalRecordNumber($number) {
 	_assertExists(_link("Total de registros: " + $number));
-	_assertVisible(_link("Total de registros: " + $number));
+
 	_assertEqual("Total de registros: " + $number, _getText(_link("Total de registros: " + $number)));
 }
 
 function assertSuccessRecord($assertedText) {
 	_assertExists(_span($assertedText));
-	_assertVisible(_span($assertedText));
 	_assertEqual($assertedText, _getText(_span($assertedText)));
 }
 

@@ -1,0 +1,22 @@
+_include("address_data.sah");
+_include("../navigate.sah");
+_include("../record.sah");
+_include("../util.sah");
+
+var $city = generateCountryData();
+
+navigateAuxiliaryCad("Endereços", "Cidades");
+inputTextWrite("description", $city.nome_cidade);
+_click(_span("Pesquisar"));
+assertTotalRecordNumber(0);
+_click(_div("Novo"));
+_setSelected(_select("countryId"), $city.nome_pais);
+_setSelected(_select("stateId"), $city.nome_estado);
+inputTextWrite("description", $city.nome_cidade);
+inputTextWrite("ibgeCode", $city.codigo_ibge);
+_click(_div("Salvar"));
+assertSuccessRecord("As informações foram salvas com sucesso!");
+navigateAuxiliaryCad("Endereços", "Cidades");
+inputTextWrite("description", $city.nome_cidade);
+_click(_span("Pesquisar"));
+assertTotalRecordNumber(1);
