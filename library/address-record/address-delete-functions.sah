@@ -1,0 +1,43 @@
+_include("address-data.sah");
+_include("../navigate.sah");
+
+//Funções de exclusão de cadastros, cada uma possibilitando escolher a quantidade de registros a serem excluídos
+function deleteCity($times) {
+
+    var $cityData = generateCountryData();
+    for($i = 0; $i < $times; $i++) {
+
+        navigateAuxiliaryCad("Endereços", "Cidades");
+        _setValue(_textbox("description"), $cityData.nome_cidade + $i);
+        _click(_span("Pesquisar"));
+        _click(_cell($cityData.nome_cidade + $i));
+        _doubleClick(_cell($cityData.nome_cidade + $i));
+        _click(_div("Excluir"));
+    }
+}
+
+function deleteProvince($times) {
+    var $provinceData = generateCountryData();
+    for($i = 0; $i < $times; $i++) {
+
+        navigateAuxiliaryCad("Endereços", "Estados");
+        _setValue(_textbox("description"), $provinceData.nome_estado + $i);
+        _click(_span("Pesquisar"));
+        _click(_cell($provinceData.nome_estado + $i));
+        _doubleClick(_cell($provinceData.nome_estado + $i));
+        _click(_div("Excluir"));
+    }    
+}
+
+function deleteCountry($times) {
+    var $countryData = generateCountryData();
+    for($i = 0; $i < $times; $i++) {
+
+        navigateAuxiliaryCad("Endereços", "Países");
+        _setValue(_textbox("description"), $countryData.nome_pais + $i);
+        _click(_span("Pesquisar"));
+        _click(_cell($countryData.nome_pais + $i));
+        _doubleClick(_cell($countryData.nome_pais + $i));
+        _click(_div("Excluir"));
+    }    
+}
