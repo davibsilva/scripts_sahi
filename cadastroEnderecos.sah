@@ -1,60 +1,13 @@
-_include("../library/navigate.sah");
-_include("../library/record.sah");
-_include("../library/util.sah");
+_include("./library/cadastroEndereco/cadastro.sah");
+_include("./library/cadastroEndereco/deleteCidade.sah");
 
-for ($i=0; $i < 1; $i++) {
-    $endereco = {
-        "nome_pais": "b" + $i,
-        "nome_pais_ingles": "b" + $i,
-        "sigla_pais": "Z" + $i,
-        "nome_estado": "b" + $i,
-        "sigla_estado": "Z" + $i,
-        "nome_cidade": "b" + $i,
-        "codigo_ibge": "123456" + $i 
-   };
+//Chamada de funções externas, separando cada tipo de cadastro em um arquivo diferente e salvo em uma pasta
+//assim organizando melhor e assim importando somente os arquivos necessários para cada caso.
+//Também melhorando o desempenho
 
-
-
-//cad paises
-
-
-
-//cad cidades
-
-
-//testando função excluir cidades
-navigateAuxiliaryCad("Endereços", "Cidades");
-writeTextBox("description", $endereco.nome_cidade);
-_click(_span("Pesquisar"));
-_click(_cell($endereco.nome_cidade));
-_click(_div("Excluir"));
-_expectConfirm("Deseja realmente excluir este registro?", true);
-navigateAuxiliaryCad("Endereços", "Cidades");
-writeTextBox("description", $endereco.nome_cidade);
-_click(_span("Pesquisar"));
-assertRecordNumber(0);
-
-//testando função excluir estados
-navigateAuxiliaryCad("Endereços", "Estados");
-writeTextBox("description", $endereco.nome_estado);
-_click(_span("Pesquisar"));
-_click(_cell($endereco.nome_estado));
-_click(_div("Excluir"));
-_expectConfirm("Deseja realmente excluir este registro?", true);
-navigateAuxiliaryCad("Endereços", "Estados");
-writeTextBox("description", $endereco.nome_estado);
-_click(_span("Pesquisar"));
-assertRecordNumber(0);
-
-// testando função excluir paises
-navigateAuxiliaryCad("Endereços", "Países");
-writeTextBox("description", $endereco.nome_pais);
-_click(_span("Pesquisar"));
-_click(_cell($endereco.nome_pais));
-_click(_div("Excluir"));
-_expectConfirm("Deseja realmente excluir este registro?", true);
-navigateAuxiliaryCad("Endereços", "Países");
-writeTextBox("description", $endereco.nome_pais);
-_click(_span("Pesquisar"));
-assertRecordNumber(0);
-}
+recordCountry(6);
+recordProvince(6);
+recordCity(6);
+deleteCity(6);
+deleteProvince(6);
+deleteCountry(6);

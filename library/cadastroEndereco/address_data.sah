@@ -1,14 +1,16 @@
+//Função que define os valores a serem preenchidos nos campos de texto em seguida retornando os valores
+//By Davi
 function generateCountryData(){
 	var $addressData = {
 	"nome_pais": "NomePais",
     "nome_pais_ingles": "CountryName",
-    "sigla_pais": "NP",
+    "sigla_pais": "N",
     "nome_estado": "NomeEstado",
-    "sigla_estado": "NE",
+    "sigla_estado": "N",
     "nome_cidade":  "NomeCidade",
-    "codigo_ibge":  "123456"
-	}
-
+    "codigo_ibge":  "12345"
+    }
+    
 	return $addressData;
 }
 

@@ -1,0 +1,83 @@
+_include("address_data.sah");
+_include("../navigate.sah");
+_include("../record.sah");
+_include("../util.sah");
+
+//Importamos o arquivo com os valores dos campos e fizemos a chamada da função em uma variável
+//Assim recuperando o valor retornado para utilizar na função de cadastro
+
+var $addressData = generateCountryData();
+
+function recordCountry($times){
+
+	for($i = 0; $i < $times; $i ++) {
+
+		navigateAuxiliaryCad("Endereços", "Países");
+		inputTextWrite("description", $addressData.nome_pais + $i);
+		_click(_span("Pesquisar"));
+		assertTotalRecordNumber(0);
+		_click(_div("Novo"));
+		inputTextWrite("description", $addressData.nome_pais + $i);
+		inputTextWrite("descriptionEnUs", $addressData.nome_pais_ingles + $i);
+		inputTextWrite("code", $addressData.sigla_pais + $i);
+		_click(_div("Salvar"));
+		assertSuccessRecord("As informações foram salvas com sucesso!");
+		navigateAuxiliaryCad("Endereços", "Países");
+		inputTextWrite("description", $addressData.nome_pais + $i);
+		_click(_span("Pesquisar"));
+		assertTotalRecordNumber(1);	
+	}
+}
+
+//Importamos o arquivo com os valores dos campos e fizemos a chamada da função em uma variável
+//Assim recuperando o valor retornado para utilizar na função de cadastro
+
+function recordProvince($times){
+
+    //cad estados
+    for($i = 0; $i < $times; $i++) {
+
+        navigateAuxiliaryCad("Endereços", "Estados");
+        _click(_textbox("description"));
+        inputTextWrite("description", $addressData.nome_estado + $i);
+        _click(_div("Pesquisar"));
+        assertTotalRecordNumber(0);
+        _click(_div("Novo"));
+        _setSelected(_select("countryId"), $addressData.nome_pais + $i);
+        inputTextWrite("initial", $addressData.sigla_estado + $i);
+        inputTextWrite("description", $addressData.nome_estado + $i);
+        _click(_div("Salvar"));
+        assertSuccessRecord("As informações foram salvas com sucesso!");
+        navigateAuxiliaryCad("Endereços", "Estados");
+        inputTextWrite("description", $addressData.nome_estado + $i);
+        _click(_span("Pesquisar"));
+        assertTotalRecordNumber(1);
+    }
+}
+
+//Importamos o arquivo com os valores dos campos e fizemos a chamada da função em uma variável
+//Assim recuperando o valor retornado para utilizar na função de cadastro
+
+function recordCity($times) {
+    
+    for($i = 0; $i < $times; $i++) {
+        
+        navigateAuxiliaryCad("Endereços", "Cidades");
+        inputTextWrite("description", $addressData.nome_cidade + $i);
+        _click(_span("Pesquisar"));
+        assertTotalRecordNumber(0);
+        _click(_div("Novo"));
+        _setSelected(_select("countryId"), $addressData.nome_pais + $i);
+        _setSelected(_select("stateId"), $addressData.nome_estado + $i);
+        inputTextWrite("description", $addressData.nome_cidade + $i);
+        inputTextWrite("ibgeCode", $addressData.codigo_ibge + $i);
+        _click(_div("Salvar"));
+        assertSuccessRecord("As informações foram salvas com sucesso!");
+        navigateAuxiliaryCad("Endereços", "Cidades");
+        inputTextWrite("description", $addressData.nome_cidade + $i);
+        _click(_span("Pesquisar"));
+        assertTotalRecordNumber(1);
+    }
+}
+
+
