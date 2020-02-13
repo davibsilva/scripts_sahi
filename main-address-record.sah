@@ -1,5 +1,5 @@
-_include("./library/cadastroEndereco/cadastro.sah");
-_include("./library/cadastroEndereco/deleteCidade.sah");
+_include("./library/address-record/address-record-functions.sah");
+_include("./library/address-record/city-delete.sah");
 
 //Chamada de funções externas, separando cada tipo de cadastro em um arquivo diferente e salvo em uma pasta
 //assim organizando melhor e assim importando somente os arquivos necessários para cada caso.
